@@ -25,6 +25,7 @@ public class SDateLookupTableXMLFile extends AnnualDataXMLFile {
 			for (int i = 0; i < sdates.size(); i++) {
 				rootElement.appendChild(DOMElementBuilder.build(sdates.get(i), document));
 			}
+			return true;
 		}
 		return false;
 	}
