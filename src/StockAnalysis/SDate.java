@@ -3,6 +3,8 @@ package StockAnalysis;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import MyFileSystem.DOMObject;
+
 /**
  * The <code>StockDate</code> class
  * @author michaelstecklein
@@ -15,21 +17,64 @@ import java.util.GregorianCalendar;
  * The first day of the market is denoted by a '0' for the day number.
  */
 @SuppressWarnings("serial")
+@DOMObject(
+	elements = { "dayNumber", "day", "month", "year" }
+)
 public class SDate extends GregorianCalendar {
 	
-	final public static int InvalidStockDate = -1; 
+	final public static int InvalidStockDate = -1;
+	
+	/* DOM Elements */
+	private int dayNumber;
+	private int day;
+	private int month;
+	private int year;
 	
 	public SDate() {
 		this(InvalidStockDate);
 	}
 	
 	public SDate(int dayNumber) {
-		SDate temp = convertDayNumberToDate(dayNumber);
-		setDate(temp.getDay(), temp.getMonth(), temp.getYear());
+		this.dayNumber = dayNumber;
+		SDate s = convertDayNumberToDate(dayNumber);
+		setDate(s.getDay(), s.getMonth(), s.getYear());
+	}
+	
+	public SDate(int day, int month, int year) {
+		this(convertDateToDayNumber(day, month, year));
 	}
 	
 	public SDate(Calendar calendar) {
-		this(convertDateToDayNumber(calendar.get(DAY_OF_MONTH), calendar.get(MONTH), calendar.get(YEAR)));
+		this(calendar.get(DAY_OF_MONTH), calendar.get(MONTH), calendar.get(YEAR));
+	}
+	
+	public int getDayNumber() {
+		return dayNumber;
+	}
+	
+	public int getDay() {
+		return day;
+	}
+	
+	public int getMonth() {
+		return month;
+	}
+	
+	public int getYear() {
+		return year;
+	}
+	
+	private void setDate(int day, int month, int year) {
+		this.set(Calendar.DAY_OF_MONTH, day);
+		this.day = day;
+		this.set(Calendar.MONTH, month);
+		this.month = month;
+		this.set(Calendar.YEAR, year);
+		this.year = year;
+	}
+	
+	public static SDate getTodaysDate() {
+		return new SDate(Calendar.getInstance());
 	}
 	
 	public static int convertDateToDayNumber(int day, int month, int year) {
@@ -38,32 +83,6 @@ public class SDate extends GregorianCalendar {
 	
 	public static SDate convertDayNumberToDate(int dayNumber) {
 		return new SDate(0); // TODO
-	}
-	
-	public int getDayNumber() {
-		return convertDateToDayNumber(this.getDay(), this.getMonth(), this.getYear());
-	}
-	
-	public int getDay() {
-		return this.get(Calendar.DAY_OF_MONTH);
-	}
-	
-	public int getMonth() {
-		return this.get(Calendar.MONTH);
-	}
-	
-	public int getYear() {
-		return this.get(Calendar.YEAR);
-	}
-	
-	public void setDate(int day, int month, int year) {
-		this.set(Calendar.DAY_OF_MONTH, day);
-		this.set(Calendar.MONTH, month);
-		this.set(Calendar.YEAR, year);
-	}
-	
-	public static SDate getTodaysDate() {
-		return new SDate(Calendar.getInstance());
 	}
 	
 }

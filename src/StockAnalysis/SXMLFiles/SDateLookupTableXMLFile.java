@@ -6,6 +6,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import MyFileSystem.AnnualDataXMLFile;
+import MyFileSystem.DOMElementBuilder;
 import StockAnalysis.SDate;
 
 @SuppressWarnings("serial")
@@ -20,9 +21,9 @@ public class SDateLookupTableXMLFile extends AnnualDataXMLFile {
 
 	@Override
 	public boolean updateXMLContent(Document document, Element rootElement) {
-		if (document.getElementsByTagName(DOMElementFactory.getTag(SDate.class)).getLength() == 0) {
+		if (document.getElementsByTagName(DOMElementBuilder.getTag(SDate.class)).getLength() == 0) {
 			for (int i = 0; i < sdates.size(); i++) {
-				rootElement.appendChild(DOMElementFactory.create(sdates.get(i)));
+				rootElement.appendChild(DOMElementBuilder.build(sdates.get(i), document));
 			}
 		}
 		return false;

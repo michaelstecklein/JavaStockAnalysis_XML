@@ -99,21 +99,4 @@ public abstract class XMLFile extends CustomFile {
 		return XMLFileExtension;
 	}
 	
-	
-	/**
-	 * The <code>StandardXMLElements</code> class provides finalized string representations of generic
-	 * XML element types for standardization purposes.
-	 * @author michaelstecklein
-	 *
-	 */
-	public static class StandardXMLElements {
-		public final static String Array = "array";
-		public final static String Strng = "string";
-		public final static String Date = "date";
-		public final static String Day = "day";
-		public final static String Month = "month";
-		public final static String Year = "year";
-		public final static String LastUpdate = "lastupdate";
-	}
-	
 }
