@@ -19,17 +19,8 @@ public abstract class AnnualDataXMLFile extends UpdatableXMLFile {
 	 * @param year
 	 */
 	public AnnualDataXMLFile(int year) {
-		super(getFileNameStub().concat(String.valueOf(year)));
+		super(String.valueOf(year));
 		this.year = year;
-	}
-	
-	/**
-	 * Returns the beginning of the file name for annual XML files. They will follow the format '<fileNameStub><year>.xml'.
-	 * This method should be overwritten to add a prefixed file name pattern to the annual file name.
-	 * @return
-	 */
-	public static String getFileNameStub() {
-		return "";
 	}
 	
 	@Override

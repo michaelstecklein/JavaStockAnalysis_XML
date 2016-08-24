@@ -1,12 +1,13 @@
 package StockAnalysis;
 
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import MyFileSystem.Directory;
 import MyFileSystem.MyFileSystem;
 import MyFileSystem.RootDirectory;
+import StockAnalysis.SXMLFiles.SDateLookupTableXMLFile;
 import StockAnalysis.SXMLFiles.TickerListXMLFile;
 
 public class StockDataFileSystem implements MyFileSystem {
@@ -56,8 +57,17 @@ public class StockDataFileSystem implements MyFileSystem {
 	private void initDateLookupTables(Directory dateLookupTablesDir) {
 		for (int year = SUtil.FirstMarketDate.getYear(); year <= SDate.getTodaysDate().getYear(); year++) {
 			List<SPrice> prices = SUtil.scrapePrices(SUtil.MarketDatesLookupTicker, year);
-			dateLookupTablesDir.add(new DateLookupTableXMLFile(year, prices));
+			List<SDate> sdates = extractSDates(prices);
+			dateLookupTablesDir.add(new SDateLookupTableXMLFile(year, sdates));
 		}
+	}
+	
+	private List<SDate> extractSDates(List<SPrice> prices) {
+		List<SDate> sdates = new ArrayList<SDate>();
+		for (int i = 0; i < prices.size(); i++) {
+			sdates.add(prices.get(i).date);
+		}
+		return sdates;
 	}
 	
 	private void initTickerLists(Directory tickerListsDir) {
