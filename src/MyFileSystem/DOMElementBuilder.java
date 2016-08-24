@@ -5,6 +5,12 @@ import java.lang.reflect.Field;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+/**
+ * The DOMElementBuilder class is a static class that can be used to build DOM Element objects from classes
+ * that are annotated with the DOMObject annotation.
+ * @author michaelstecklein
+ *
+ */
 public class DOMElementBuilder {
 	
 	/**

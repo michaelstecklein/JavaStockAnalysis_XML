@@ -16,10 +16,10 @@ import MyFileSystem.DOMObject;
  * in reference to an original start date so that each day the market is open is numbered sequentially via its "dayNumber".
  * The first day of the market is denoted by a '0' for the day number.
  */
-@SuppressWarnings("serial")
 @DOMObject(
 	elements = { "dayNumber", "day", "month", "year" }
 )
+@SuppressWarnings("serial")
 public class SDate extends GregorianCalendar {
 	
 	final public static int InvalidStockDate = -1;
